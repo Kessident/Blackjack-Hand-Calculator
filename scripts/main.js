@@ -12,7 +12,7 @@
 
 function handValue (hand) {
   let score = 0;
-  let scoreAce = 0;
+  let numAce = 0;
 
   for (let i = 0; i < hand.length; i++){
     if (parseInt(hand[i])){
@@ -21,27 +21,25 @@ function handValue (hand) {
 
     if (hand[i] === "J" || hand[i] === "Q" || hand[i] === "K"){
       score += 10;
-      scoreAce += 10;
     }
     else if (hand[i] === "A"){
-      score ++;
-      scoreAce += 11;
+      numAce++;
     }
     else {
       score += hand[i];
-      scoreAce += hand[i];
     }
   }
-  let result = 0;
-  
-  if (Math.abs(score - 21) > Math.abs(scoreAce - 21)){
-    result = scoreAce;
-  }
-  else {
-    result = score;
+
+  for (let i = 0; i < numAce; i++){
+    if (score + 11 > 21){
+      score++;
+    }else {
+      score += 11;
+    }
   }
 
-  return result;
+  return score;
+
 }
 
 
